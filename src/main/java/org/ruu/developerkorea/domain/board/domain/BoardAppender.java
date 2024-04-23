@@ -1,8 +1,8 @@
-package org.ruu.developerkorea.board.domain;
+package org.ruu.developerkorea.domain.board.domain;
 
 import lombok.RequiredArgsConstructor;
-import org.ruu.developerkorea.board.dto.RequestAddBoardDTO;
-import org.ruu.developerkorea.board.repository.BoardRepository;
+import org.ruu.developerkorea.domain.board.dto.RequestAddBoardDTO;
+import org.ruu.developerkorea.domain.board.repository.BoardRepository;
 import org.springframework.stereotype.Component;
 
 @Component

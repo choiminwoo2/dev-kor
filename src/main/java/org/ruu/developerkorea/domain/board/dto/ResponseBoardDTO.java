@@ -1,4 +1,4 @@
-package org.ruu.developerkorea.board.dto;
+package org.ruu.developerkorea.domain.board.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,4 +1,4 @@
-package org.ruu.developerkorea.board.domain;
+package org.ruu.developerkorea.domain.board.domain;
 
 import jakarta.persistence.*;
 import lombok.*;

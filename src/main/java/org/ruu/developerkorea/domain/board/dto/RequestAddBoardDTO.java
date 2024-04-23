@@ -1,8 +1,8 @@
-package org.ruu.developerkorea.board.dto;
+package org.ruu.developerkorea.domain.board.dto;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
-import org.ruu.developerkorea.board.domain.Board;
+import org.ruu.developerkorea.domain.board.domain.Board;
 
 @Builder
 @Getter

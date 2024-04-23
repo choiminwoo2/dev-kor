@@ -1,9 +1,9 @@
-package org.ruu.developerkorea.board.service;
+package org.ruu.developerkorea.domain.board.service;
 
 
 import lombok.RequiredArgsConstructor;
-import org.ruu.developerkorea.board.domain.BoardAppender;
-import org.ruu.developerkorea.board.dto.RequestAddBoardDTO;
+import org.ruu.developerkorea.domain.board.domain.BoardAppender;
+import org.ruu.developerkorea.domain.board.dto.RequestAddBoardDTO;
 import org.springframework.stereotype.Service;
 
 @Service

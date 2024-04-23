@@ -1,6 +1,6 @@
-package org.ruu.developerkorea.board.repository;
+package org.ruu.developerkorea.domain.board.repository;
 
-import org.ruu.developerkorea.board.domain.Board;
+import org.ruu.developerkorea.domain.board.domain.Board;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface BoardRepository extends JpaRepository<Board, Long> {

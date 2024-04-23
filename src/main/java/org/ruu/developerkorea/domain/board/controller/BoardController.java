@@ -1,12 +1,12 @@
-package org.ruu.developerkorea.board.controller;
+package org.ruu.developerkorea.domain.board.controller;
 
 import groovy.util.logging.Slf4j;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.ruu.developerkorea.board.dto.RequestAddBoardDTO;
-import org.ruu.developerkorea.board.service.BoardService;
+import org.ruu.developerkorea.domain.board.dto.RequestAddBoardDTO;
+import org.ruu.developerkorea.domain.board.service.BoardService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;

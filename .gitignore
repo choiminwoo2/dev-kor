@@ -37,6 +37,6 @@ out/
 .vscode/
 
 ### spring config ###
-**/main/resources/application.properties
+**/main/resources/application-db.properties
 
 ### Api keys ###
