@@ -36,6 +36,9 @@ out/
 ### VS Code ###
 .vscode/
 
+### logger ###
+logs
+
 ### spring config ###
 **/main/resources/application-db.properties
 
