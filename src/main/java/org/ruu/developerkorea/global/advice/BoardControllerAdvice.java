@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class BoardControllerAdvice {
 
     @ExceptionHandler(BusinessLogicException.class)
-    @ResponseStatus(HttpStatus.EXPECTATION_FAILED)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ResponseEntity<String> handleBusinessLogicException(final BusinessLogicException e) {
 
         return ResponseEntity.badRequest().body(e.getMessage());

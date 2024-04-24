@@ -26,13 +26,8 @@ public class BoardJdbcRepository {
         String sql = "INSERT INTO board (BOARD_NAME, DESCRIPTION) VALUES (?, ?)";
         int update = jdbcTemplate.update(sql, board.getName(), board.getDescription());
         String query = "SELECT BOARD_ID FROM board WHERE BOARD_NAME = ?";
-        Long id = null;
-        try{
-            id = jdbcTemplate.queryForObject(query, Long.class, board.getName());
-        }catch (DataAccessException e){
-            throw new BusinessLogicException("Error to database");
-        }
-        if(update == 0){
+        Long id = jdbcTemplate.queryForObject(query, Long.class, board.getName());
+        if (update == 0) {
             throw new BusinessLogicException("non existent data");
         }
 
@@ -41,13 +36,9 @@ public class BoardJdbcRepository {
 
     public Long update(Board board) {
         String sql = "UPDATE board SET DESCRIPTION = ? WHERE BOARD_ID = ?";
-        int update;
-        try{
-            update = jdbcTemplate.update(sql, board.getDescription(), board.getId());
-        }catch (DataAccessException e){
-            throw new BusinessLogicException("Error to database");
-        }
-        if(update == 0){
+        int update = jdbcTemplate.update(sql, board.getDescription(), board.getId());
+        if (update == 0) {
+
             throw new BusinessLogicException("non existent data");
         }
         return board.getId();
@@ -67,7 +58,7 @@ public class BoardJdbcRepository {
     public void delete(Long id) {
         String selectQuery = "SELECT * FROM BOARD WHERE BOARD_ID = ?";
         Long existBoard = jdbcTemplate.queryForObject(selectQuery, Long.class, id);
-        if(existBoard == null || !existBoard.equals(id)) {
+        if (existBoard == null || !existBoard.equals(id)) {
             return;
         }
         String sql = "DELETE FROM board WHERE BOARD_ID = ?";
