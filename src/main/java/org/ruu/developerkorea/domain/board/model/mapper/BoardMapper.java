@@ -4,6 +4,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 import org.ruu.developerkorea.domain.board.domain.Board;
 import org.ruu.developerkorea.domain.board.model.dto.RequestAppendBoardDTO;
+import org.ruu.developerkorea.domain.board.model.dto.RequestUpdateBoardDTO;
 import org.ruu.developerkorea.domain.board.model.dto.ResponseBoardDTO;
 
 @Mapper
@@ -17,5 +18,5 @@ public interface BoardMapper {
 
     Board requestAppendBoardDTOToBoard(RequestAppendBoardDTO requestAppendBoardDTO);
 
-    Board requestUpdateBoardDTOToBoard(RequestAppendBoardDTO requestAppendBoardDTO);
+    Board requestUpdateBoardDTOToBoard(RequestUpdateBoardDTO requestUpdateBoardDTO);
 }
