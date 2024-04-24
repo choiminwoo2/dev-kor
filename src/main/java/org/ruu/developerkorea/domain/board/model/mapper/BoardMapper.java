@@ -15,5 +15,7 @@ public interface BoardMapper {
 
     Board dtoToResponseBoardDTO(ResponseBoardDTO responseBoardDTO);
 
-    Board requestAppendBoardToBoard(RequestAppendBoardDTO requestAppendBoardDTO);
+    Board requestAppendBoardDTOToBoard(RequestAppendBoardDTO requestAppendBoardDTO);
+
+    Board requestUpdateBoardDTOToBoard(RequestAppendBoardDTO requestAppendBoardDTO);
 }

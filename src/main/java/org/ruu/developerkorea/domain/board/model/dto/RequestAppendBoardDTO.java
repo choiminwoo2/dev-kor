@@ -7,7 +7,6 @@ import org.ruu.developerkorea.domain.board.domain.Board;
 
 @Builder
 @Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class RequestAppendBoardDTO {
@@ -19,5 +18,7 @@ public class RequestAppendBoardDTO {
     @NotNull
     @Size(min = 1, max = 1000)
     private String description;
+
+    private String board_pwd;
 
 }

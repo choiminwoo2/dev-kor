@@ -7,12 +7,10 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.ruu.developerkorea.domain.board.model.dto.RequestAppendBoardDTO;
 import org.ruu.developerkorea.domain.board.service.BoardService;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/board")
@@ -27,9 +25,13 @@ public class BoardController {
     @PostMapping
     public String createBoard(@RequestBody @Valid RequestAppendBoardDTO boardDTO, Model model) {
 
-        boardService.insertBoard(boardDTO);
-        model.addAttribute("ok", true);
+        Long result = boardService.insertBoard(boardDTO);
+        model.addAttribute(HttpStatus.OK.name(), false);
+        if(result != null) {
+            model.addAttribute(HttpStatus.OK.name(), true);
+        }
         return "index";
     }
+
 
 }
