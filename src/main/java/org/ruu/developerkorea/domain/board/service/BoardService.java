@@ -3,7 +3,7 @@ package org.ruu.developerkorea.domain.board.service;
 
 import lombok.RequiredArgsConstructor;
 import org.ruu.developerkorea.domain.board.domain.BoardAppender;
-import org.ruu.developerkorea.domain.board.dto.RequestAddBoardDTO;
+import org.ruu.developerkorea.domain.board.model.dto.RequestAppendBoardDTO;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -12,7 +12,7 @@ public class BoardService {
 
     private final BoardAppender boardAppender;
 
-    public void insertBoard(RequestAddBoardDTO requestAddBoardDTO) {
-        boardAppender.append(requestAddBoardDTO);
+    public void insertBoard(RequestAppendBoardDTO requestAppendBoardDTO) {
+        boardAppender.append(requestAppendBoardDTO);
     }
 }

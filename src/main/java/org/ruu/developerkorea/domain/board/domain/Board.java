@@ -16,8 +16,9 @@ public class Board {
     @Column(name = "BOARD_ID")
     private Long id;
 
-    @Column(name = "BOARD_NAME", nullable = false, unique = true)
+    @Column(name = "BOARD_NAME", nullable = false, unique = true, length = 100)
     private String name;
 
-
+    @Column(nullable = false, length = 1000)
+    private String description;
 }
