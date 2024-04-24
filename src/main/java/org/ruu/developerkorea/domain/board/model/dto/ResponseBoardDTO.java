@@ -9,5 +9,6 @@ import lombok.Getter;
 @AllArgsConstructor
 public class ResponseBoardDTO {
 
+    private Long id;
     private String name;
 }

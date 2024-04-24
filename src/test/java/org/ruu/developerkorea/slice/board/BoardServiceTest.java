@@ -1,6 +1,5 @@
 package org.ruu.developerkorea.slice.board;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -15,8 +14,11 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 public class BoardServiceTest {
 
-    @InjectMocks
+    @Mock
     private BoardAppender boardAppenderMock;
+
+    @InjectMocks
+    private BoardService boardServiceMock;
 
     @Test
     public void insertBoard() {
@@ -26,7 +28,7 @@ public class BoardServiceTest {
                 .description("Test Description")
                 .build();
         // When
-        doNothing().when(boardAppenderMock).append(requestDTO);
+        boardServiceMock.insertBoard(requestDTO);
         // Then
         verify(boardAppenderMock, times(1)).append(requestDTO);
     }
