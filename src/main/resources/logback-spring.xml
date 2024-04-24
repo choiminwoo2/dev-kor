@@ -23,7 +23,7 @@
         <appender-ref ref="STDOUT" />
     </root>
 
-    <logger name="io.elice.elcademy.subject.controller" level="DEBUG">
+    <logger name="org.ruu.developerkorea" level="DEBUG">
         <appender-ref ref="FILE" />
     </logger>
 
