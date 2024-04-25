@@ -30,14 +30,27 @@ public class BoardControllerTest {
     public void createBoardWithPostMethod() throws Exception {
 
         //given
-        String requestBody = "{\"title\": \"testtitle\", \"description\": \"testdescription\"}";
+        String requestBody = "{\"name\": \"testname\"" +
+                ", \"description\": \"testdescription\"" +
+                ",  \"pwd\": \"pwd\"}";
 
         mockMvc.perform(post("/board")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(requestBody))
                 .andDo(print())
                 .andExpect(status().isOk());
-//                .andExpect(jsonPath("$.title").value("testtitle"))
-//                .andExpect(jsonPath("$.description").value("testdescription"));
+    }
+
+    @Test
+    public void updateBoardWithPutMethod() throws Exception {
+
+        //given
+        String requestBody = "{\"id\": \"1L\", \"description\": \"testdescription\"}";
+
+        mockMvc.perform(post("/board")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(requestBody))
+                .andDo(print())
+                .andExpect(status().isOk());
     }
 }

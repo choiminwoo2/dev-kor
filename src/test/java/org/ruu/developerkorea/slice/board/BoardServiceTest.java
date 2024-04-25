@@ -5,8 +5,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.ruu.developerkorea.domain.board.domain.BoardAppender;
-import org.ruu.developerkorea.domain.board.model.dto.RequestAppendBoardDTO;
+import org.ruu.developerkorea.domain.board.domain.board.BoardAppender;
+import org.ruu.developerkorea.domain.board.model.dto.board.RequestAppendBoardDTO;
 import org.ruu.developerkorea.domain.board.service.BoardService;
 
 import static org.mockito.Mockito.*;
