@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Profile;
 @Configuration
 public class SwaggerConfig {
 
-    private final String REST_API_ROOT = "/api/**";
+    private final String REST_API_ROOT = "/api/v1/**";
     private final String REST_API_GROUP = "REST API";
 
     private final String COMMON_API_ROOT = "/**/*";
