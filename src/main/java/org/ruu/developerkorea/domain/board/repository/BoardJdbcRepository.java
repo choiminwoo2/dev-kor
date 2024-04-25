@@ -3,9 +3,9 @@ package org.ruu.developerkorea.domain.board.repository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.ruu.developerkorea.domain.board.domain.Board;
+import org.ruu.developerkorea.domain.board.domain.board.Board;
+import org.ruu.developerkorea.domain.board.model.dto.board.ResponseBoardDTO;
 import org.ruu.developerkorea.global.error.BusinessLogicException;
-import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.lang.Nullable;
@@ -23,15 +23,7 @@ public class BoardJdbcRepository {
     @Transactional
     @Nullable
     public Long save(Board board) {
-        String sql = "INSERT INTO board (BOARD_NAME, DESCRIPTION) VALUES (?, ?)";
-        int update = jdbcTemplate.update(sql, board.getName(), board.getDescription());
-        String query = "SELECT BOARD_ID FROM board WHERE BOARD_NAME = ?";
-        Long id = jdbcTemplate.queryForObject(query, Long.class, board.getName());
-        if (update == 0) {
-            throw new BusinessLogicException("non existent data");
-        }
-
-        return id;
+        return null;
     }
 
     public Long update(Board board) {
@@ -45,8 +37,14 @@ public class BoardJdbcRepository {
     }
 
     public List<Board> findAll() {
-        String sql = "SELECT * FROM board";
-        return jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Board.class));
+        String sql = "SELECT BOARD_ID, BOARD_NAME, DESCRIPTION FROM board";
+
+        List<Board> boards = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Board.class));
+        if(boards.isEmpty()){
+            throw new BusinessLogicException("query is empty");
+        }
+
+        return boards;
     }
 
     public Board findById(Long id) {
@@ -65,4 +63,7 @@ public class BoardJdbcRepository {
         jdbcTemplate.update(sql, id);
     }
 
+    public ResponseBoardDTO findByName(String name) {
+
+    }
 }
