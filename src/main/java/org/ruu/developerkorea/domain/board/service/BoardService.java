@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.ruu.developerkorea.domain.board.domain.board.*;
 import org.ruu.developerkorea.domain.board.model.dto.board.RequestAppendBoardDTO;
 import org.ruu.developerkorea.domain.board.model.dto.board.RequestUpdateBoardDTO;
-import org.ruu.developerkorea.domain.board.model.dto.board.ResponseBoardDTO;
+import org.ruu.developerkorea.domain.board.model.dto.board.ResponseBoardWithPostDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -35,7 +35,7 @@ public class BoardService {
         boardRemover.remove(id);
     }
 
-    public ResponseBoardDTO displayBoardByName(String name) {
+    public ResponseBoardWithPostDTO displayBoardByName(String name) {
         return boardRetriever.retrieveBoardByName(name);
     }
 }

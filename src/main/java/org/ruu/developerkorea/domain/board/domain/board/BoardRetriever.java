@@ -1,7 +1,7 @@
 package org.ruu.developerkorea.domain.board.domain.board;
 
 import lombok.RequiredArgsConstructor;
-import org.ruu.developerkorea.domain.board.model.dto.board.ResponseBoardDTO;
+import org.ruu.developerkorea.domain.board.model.dto.board.ResponseBoardWithPostDTO;
 import org.ruu.developerkorea.domain.board.repository.BoardJdbcRepository;
 import org.springframework.stereotype.Component;
 
@@ -18,7 +18,7 @@ public class BoardRetriever {
         return boardRepository.findAll();
     }
 
-    public ResponseBoardDTO retrieveBoardByName(String name) {
+    public ResponseBoardWithPostDTO retrieveBoardByName(String name) {
         return boardRepository.findByName(name);
     }
 }

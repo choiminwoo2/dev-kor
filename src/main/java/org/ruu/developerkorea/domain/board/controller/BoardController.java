@@ -8,7 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.ruu.developerkorea.domain.board.domain.board.Board;
 import org.ruu.developerkorea.domain.board.model.dto.board.RequestAppendBoardDTO;
 import org.ruu.developerkorea.domain.board.model.dto.board.RequestUpdateBoardDTO;
-import org.ruu.developerkorea.domain.board.model.dto.board.ResponseBoardDTO;
+import org.ruu.developerkorea.domain.board.model.dto.board.ResponseBoardWithPostDTO;
 import org.ruu.developerkorea.domain.board.service.BoardService;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -72,7 +72,11 @@ public class BoardController {
     @GetMapping("/{name}")
     public String getBoardByName(@PathVariable String name, Model model) {
 
-        ResponseBoardDTO boardDTO = boardService.displayBoardByName(name);
+        ResponseBoardWithPostDTO boardDTO = boardService.displayBoardByName(name);
+        model.addAttribute("dto", boardDTO);
+        log.info("BoardWithPostDTO : {} ", boardDTO);
+        return "board/board";
+
     }
 
 

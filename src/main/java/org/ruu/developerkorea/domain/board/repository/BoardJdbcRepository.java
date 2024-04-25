@@ -4,13 +4,15 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.ruu.developerkorea.domain.board.domain.board.Board;
-import org.ruu.developerkorea.domain.board.model.dto.board.ResponseBoardDTO;
+import org.ruu.developerkorea.domain.board.model.dto.board.ResponseBoardWithPostDTO;
+import org.ruu.developerkorea.domain.board.model.dto.post.PostDTO;
 import org.ruu.developerkorea.global.error.BusinessLogicException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -63,7 +65,33 @@ public class BoardJdbcRepository {
         jdbcTemplate.update(sql, id);
     }
 
-    public ResponseBoardDTO findByName(String name) {
-
+    @Nullable
+    public ResponseBoardWithPostDTO findByName(String name) {
+        String sql = "SELECT B.BOARD_NAME, B.DESCRIPTION, P.POST_ID," +
+                " P.POST_TITLE, P.POST_CONTENT, P.POST_WRITER, P.CREATED_AT, P.UPDATED_AT " +
+                "FROM BOARD B " +
+                "JOIN POST P ON B.BOARD_ID = P.BOARD_ID " +
+                "WHERE B.BOARD_NAME = ?";
+        return jdbcTemplate.query(sql, rs -> {
+            ResponseBoardWithPostDTO result = null;
+            while (rs.next()) {
+                if (result == null) {
+                    result = ResponseBoardWithPostDTO.builder()
+                            .boardName(rs.getString("BOARD_NAME"))
+                            .boardDescription(rs.getString("DESCRIPTION"))
+                            .list(new ArrayList<>())
+                            .build();
+                }
+                result.getList().add(PostDTO.builder()
+                        .postId(rs.getLong("POST_ID"))
+                        .title(rs.getString("POST_TITLE"))
+                        .content(rs.getString("POST_CONTENT"))
+                        .writer(rs.getString("POST_WRITER"))
+                        .createdAt(rs.getTimestamp("CREATED_AT").toLocalDateTime())
+                        .updatedAt(rs.getTimestamp("UPDATED_AT").toLocalDateTime())
+                        .build());
+            }
+            return result;
+        }, name);
     }
 }
