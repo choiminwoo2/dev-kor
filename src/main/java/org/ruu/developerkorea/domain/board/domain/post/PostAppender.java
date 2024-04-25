@@ -1,5 +1,6 @@
 package org.ruu.developerkorea.domain.board.domain.post;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.ruu.developerkorea.domain.board.domain.board.Board;
 import org.ruu.developerkorea.domain.board.model.dto.post.RequestAppendPostDTO;
@@ -15,10 +16,11 @@ public class PostAppender {
     private final PostRepository postRepository;
     private final BoardRepository boardRepository;
 
+    @Transactional
     public Long write(RequestAppendPostDTO requestAppendPostDTO) {
 
         Board board = boardRepository.findByName(requestAppendPostDTO.getBoardName());
-        Post post = PostMapper.INSTANCE.RequestAppendPostDTOToPost(requestAppendPostDTO);
+        Post post = PostMapper.INSTANCE.requestAppendPostDTOToPost(requestAppendPostDTO);
         post.setBoard(board);
 
         return postRepository.save(post).getId();
