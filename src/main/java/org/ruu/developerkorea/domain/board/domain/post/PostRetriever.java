@@ -15,8 +15,8 @@ public class PostRetriever {
 
     private final PostRepository postRepository;
 
-    public ResponsePostDTO retrievePostById(Long postId) {
-        Optional<Post> result = postRepository.findPostByIdWithBoard(postId);
+    public ResponsePostDTO retrievePostById(Long postId, String boardName) {
+        Optional<Post> result = postRepository.findPostByIdWithBoard(postId, boardName);
         if(result.isEmpty()){
             throw new BusinessLogicException("Post not found");
         }

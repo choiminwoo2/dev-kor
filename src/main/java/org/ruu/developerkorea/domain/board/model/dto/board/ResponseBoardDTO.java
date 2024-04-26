@@ -1,5 +1,6 @@
 package org.ruu.developerkorea.domain.board.model.dto.board;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,6 +13,6 @@ public class ResponseBoardDTO {
 
     private String name;
     private String description;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonIgnore
     private String pwd;
 }
