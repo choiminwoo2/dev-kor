@@ -2,7 +2,6 @@ package org.ruu.developerkorea.slice.board;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.ruu.developerkorea.domain.board.controller.BoardController;
 import org.ruu.developerkorea.domain.board.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
