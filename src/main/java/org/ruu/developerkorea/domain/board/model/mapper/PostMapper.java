@@ -6,6 +6,7 @@ import org.mapstruct.factory.Mappers;
 import org.ruu.developerkorea.domain.board.domain.post.Post;
 import org.ruu.developerkorea.domain.board.model.dto.post.RequestAppendPostDTO;
 import org.ruu.developerkorea.domain.board.model.dto.post.RequestUpdatePostDTO;
+import org.ruu.developerkorea.domain.board.model.dto.post.ResponsePostDTO;
 
 @Mapper
 public interface PostMapper {
@@ -15,4 +16,5 @@ public interface PostMapper {
     Post requestAppendPostDTOToPost(RequestAppendPostDTO postDTO);
 
     Post requestUpdatePostDTOToPost(RequestUpdatePostDTO postDTO);
+
 }
