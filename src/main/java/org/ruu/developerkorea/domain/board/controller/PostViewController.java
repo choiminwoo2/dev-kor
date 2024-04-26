@@ -31,7 +31,6 @@ public class PostViewController {
         }
         ResponsePostDTO post = postService.findPostById(id, boardName);
 
-
         model.addAttribute("dto", post);
         return "post/post";
     }

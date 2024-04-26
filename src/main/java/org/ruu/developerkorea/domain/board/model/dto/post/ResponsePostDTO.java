@@ -12,11 +12,12 @@ import java.time.LocalDateTime;
 @Getter
 @Builder
 public class ResponsePostDTO {
+
     private Long id;
     private ResponseBoardDTO responseBoardDTO;
     private String title;
     private String content;
-    //@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime updateAt;
 
     public static ResponsePostDTO of(Post post) {
@@ -31,5 +32,4 @@ public class ResponsePostDTO {
                         .build())
                 .build();
     }
-
 }

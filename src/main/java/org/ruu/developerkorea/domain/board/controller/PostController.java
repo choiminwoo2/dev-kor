@@ -22,7 +22,7 @@ public class PostController {
     @Operation(summary = "게시글 작성", description = "유저가 게시글을 저장합니다.")
     public ResponseEntity<String> createPost(@RequestBody RequestAppendPostDTO requestAppendPostDTO) {
         Long postNumber = postService.createPost(requestAppendPostDTO);
-        if(postNumber == null){
+        if (postNumber == null) {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok("true");
@@ -33,7 +33,7 @@ public class PostController {
     public ResponseEntity<String> updatePost(@PathVariable Long id, @RequestBody RequestUpdatePostDTO requestUpdatePostDTO) {
         requestUpdatePostDTO.setId(id);
         Long postNumber = postService.updatePost(requestUpdatePostDTO);
-        if(postNumber == null){
+        if (postNumber == null) {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok("true");
@@ -42,7 +42,7 @@ public class PostController {
     @DeleteMapping("/{id}")
     @Operation(summary = "게시글 삭제", description = "유저가 게시글을 삭제합니다.")
     public ResponseEntity<String> deletePost(@PathVariable Long id) {
-        if(id == null){
+        if (id == null) {
             return ResponseEntity.notFound().build();
         }
         postService.deletePost(id);
@@ -54,8 +54,8 @@ public class PostController {
     @GetMapping("{boardName}/{id}")
     public ResponseEntity<ResponsePostDTO> selectOnePost(
             @PathVariable final String boardName,
-            @PathVariable final Long id){
-        if(id == null){
+            @PathVariable final Long id) {
+        if (id == null) {
             return ResponseEntity.notFound().build();
         }
         ResponsePostDTO postById = postService.findPostById(id, boardName);

@@ -11,7 +11,6 @@ import java.util.List;
 @Entity
 @Builder
 @Getter
-@ToString
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class Board extends BaseEntity {

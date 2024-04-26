@@ -18,5 +18,4 @@ public class ResponseBoardWithPostDTO {
     String boardDescription;
 
     List<PostDTO> list;
-
 }

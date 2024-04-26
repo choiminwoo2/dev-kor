@@ -1,5 +1,7 @@
 package org.ruu.developerkorea.domain.board.model.dto.post;
 
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 
 import java.time.LocalDate;

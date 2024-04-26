@@ -12,7 +12,6 @@ public class BoardRewrite {
 
     private final BoardJdbcRepository boardRepository;
 
-
     public Long update(RequestUpdateBoardDTO requestUpdateBoardDTO) {
         return boardRepository.update(BoardMapper.INSTANCE.requestUpdateBoardDTOToBoard(requestUpdateBoardDTO));
     }

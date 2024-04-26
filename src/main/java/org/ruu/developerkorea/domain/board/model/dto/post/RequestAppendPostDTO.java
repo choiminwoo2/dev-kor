@@ -8,6 +8,7 @@ import lombok.Getter;
 @Builder
 @AllArgsConstructor
 public class RequestAppendPostDTO {
+
     private String boardName;
     private String title;
     private String content;

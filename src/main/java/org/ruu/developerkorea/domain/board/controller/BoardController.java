@@ -33,7 +33,7 @@ public class BoardController {
         Long result = boardService.insertBoard(boardDTO);
         model.addAttribute(HttpStatus.OK.name(), false);
         //TODO BOARD가 아니라 MYPAGE로 redirect 해야합니다.
-        if(result != null) {
+        if (result != null) {
             model.addAttribute(HttpStatus.OK.name(), true);
 
             return "redirect:board/";
@@ -62,7 +62,7 @@ public class BoardController {
 
     @Operation(summary = "특정 게시판 삭제", description = "유저가 게시판을 삭제합니다.")
     @DeleteMapping("/{id}")
-    public String deleteBoard(@PathVariable Long id,Model model) {
+    public String deleteBoard(@PathVariable Long id, Model model) {
         //TODO 마이페이지로 redirect 해야 합니다.
         boardService.deleteBoard(id);
         return "board/list";
@@ -78,7 +78,6 @@ public class BoardController {
         return "board/board";
 
     }
-
 
 
 }

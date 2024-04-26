@@ -19,5 +19,4 @@ public class RequestAppendBoardDTO {
     private String description;
 
     private String pwd;
-
 }

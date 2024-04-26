@@ -8,6 +8,7 @@ import org.ruu.developerkorea.domain.board.domain.board.Board;
 @Entity
 @Getter
 @Builder
+@ToString(exclude = "board")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class Post extends BaseEntity {
