@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <ul>
+        <th:block>
+            <h2>[[${dto.responseBoardDTO.name}]]</h2>
+            <h3>[[${dto.responseBoardDTO.description}]]</h3>
+            <li>[[${dto.id}]] [[${dto.title}]] [[${dto.content}]] [[${dto.updateAt}]]</li>
+        </th:block>
+    </ul>
+</body>
+</html>
