@@ -73,7 +73,7 @@ public class BoardController {
     public String getBoardByName(@PathVariable String name, Model model) {
 
         ResponseBoardWithPostDTO boardDTO = boardService.displayBoardByName(name);
-        model.addAttribute("dto", boardDTO);
+        model.addAttribute("dtoList", boardDTO);
         log.info("BoardWithPostDTO : {} ", boardDTO);
         return "board/board";
 

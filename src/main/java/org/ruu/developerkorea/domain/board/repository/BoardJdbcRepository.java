@@ -12,6 +12,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,7 +43,7 @@ public class BoardJdbcRepository {
         String sql = "SELECT BOARD_ID, BOARD_NAME, DESCRIPTION FROM board";
 
         List<Board> boards = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Board.class));
-        if(boards.isEmpty()){
+        if (boards.isEmpty()) {
             throw new BusinessLogicException("query is empty");
         }
 
@@ -68,10 +69,12 @@ public class BoardJdbcRepository {
     @Nullable
     public ResponseBoardWithPostDTO findByName(String name) {
         String sql = "SELECT B.BOARD_NAME, B.DESCRIPTION, P.POST_ID," +
-                " P.POST_TITLE, P.POST_CONTENT, P.POST_WRITER, P.CREATED_AT, P.UPDATED_AT " +
-                "FROM BOARD B " +
-                "JOIN POST P ON B.BOARD_ID = P.BOARD_ID " +
-                "WHERE B.BOARD_NAME = ?";
+                " P.POST_TITLE, P.POST_CONTENT, P.POST_WRITER," +
+                " P.CREATED_AT," +
+                " P.UPDATED_AT" +
+                " FROM BOARD B " +
+                " JOIN POST P ON B.BOARD_ID = P.BOARD_ID " +
+                " WHERE B.BOARD_NAME = ?";
         return jdbcTemplate.query(sql, rs -> {
             ResponseBoardWithPostDTO result = null;
             while (rs.next()) {
@@ -82,13 +85,17 @@ public class BoardJdbcRepository {
                             .list(new ArrayList<>())
                             .build();
                 }
+                LocalDate createdAt = LocalDate.from(rs.getTimestamp("CREATED_AT").toLocalDateTime());
+                LocalDate updatedAt = LocalDate.from(rs.getTimestamp("UPDATED_AT").toLocalDateTime());
+                log.info(createdAt.toString());
+                log.info(updatedAt.toString());
                 result.getList().add(PostDTO.builder()
                         .postId(rs.getLong("POST_ID"))
                         .title(rs.getString("POST_TITLE"))
                         .content(rs.getString("POST_CONTENT"))
                         .writer(rs.getString("POST_WRITER"))
-                        .createdAt(rs.getTimestamp("CREATED_AT").toLocalDateTime())
-                        .updatedAt(rs.getTimestamp("UPDATED_AT").toLocalDateTime())
+                        .createdAt(createdAt)
+                        .updatedAt(updatedAt)
                         .build());
             }
             return result;

@@ -10,7 +10,6 @@ import lombok.Getter;
 @AllArgsConstructor
 public class ResponseBoardDTO {
 
-    private Long id;
     private String name;
     private String description;
     @JsonInclude(JsonInclude.Include.NON_NULL)
