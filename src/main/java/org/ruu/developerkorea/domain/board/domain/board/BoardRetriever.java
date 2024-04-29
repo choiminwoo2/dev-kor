@@ -18,7 +18,7 @@ public class BoardRetriever {
         return boardRepository.findAll();
     }
 
-    public ResponseBoardWithPostDTO retrieveBoardByName(String name) {
-        return boardRepository.findByName(name);
+    public ResponseBoardWithPostDTO retrieveBoardByUrl(String url) {
+        return boardRepository.findByUrl(url);
     }
 }

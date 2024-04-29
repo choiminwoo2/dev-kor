@@ -70,10 +70,10 @@ public class BoardController {
     }
 
     @Operation(summary = "특정 게시판 조회", description = "누구나 특정 게시판을 조회할 수 있습니다.")
-    @GetMapping("/{name}")
-    public ResponseEntity<ResponseBoardWithPostDTO> getBoardByName(@PathVariable String name, Model model) {
+    @GetMapping("/{url}")
+    public ResponseEntity<ResponseBoardWithPostDTO> getBoardByName(@PathVariable String url, Model model) {
 
-        ResponseBoardWithPostDTO boardDTO = boardService.displayBoardByName(name);
+        ResponseBoardWithPostDTO boardDTO = boardService.displayBoardByUrl(url);
         model.addAttribute("dtoList", boardDTO);
         log.info("BoardWithPostDTO : {} ", boardDTO);
         return ResponseEntity.ok(boardDTO);

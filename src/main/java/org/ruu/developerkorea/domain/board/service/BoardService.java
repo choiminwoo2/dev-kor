@@ -35,7 +35,7 @@ public class BoardService {
         boardRemover.remove(id);
     }
 
-    public ResponseBoardWithPostDTO displayBoardByName(String name) {
-        return boardRetriever.retrieveBoardByName(name);
+    public ResponseBoardWithPostDTO displayBoardByUrl(String url) {
+        return boardRetriever.retrieveBoardByUrl(url);
     }
 }

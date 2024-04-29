@@ -29,6 +29,9 @@ public class Board extends BaseEntity {
     @Column(name = "BOARD_PWD", nullable = false, length = 25)
     private String pwd;
 
+    @Column(nullable = false, length = 100)
+    private String url;
+
     @OneToMany(mappedBy = "board", cascade = CascadeType.PERSIST)
     private List<Post> posts = new ArrayList<>();
 

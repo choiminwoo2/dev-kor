@@ -71,14 +71,14 @@ public class BoardJdbcRepository {
     }
 
     @Nullable
-    public ResponseBoardWithPostDTO findByName(String name) {
-        String sql = "SELECT B.BOARD_NAME, B.DESCRIPTION, P.POST_ID," +
+    public ResponseBoardWithPostDTO findByUrl(String url) {
+        String sql = "SELECT B.BOARD_NAME, B.DESCRIPTION, B.URL, P.POST_ID," +
                 " P.POST_TITLE, P.POST_CONTENT, P.POST_WRITER," +
                 " P.CREATED_AT," +
                 " P.UPDATED_AT" +
                 " FROM BOARD B " +
                 " JOIN POST P ON B.BOARD_ID = P.BOARD_ID " +
-                " WHERE B.BOARD_NAME = ?";
+                " WHERE B.URL = ?";
         return jdbcTemplate.query(sql, rs -> {
             ResponseBoardWithPostDTO result = null;
             while (rs.next()) {
@@ -86,6 +86,7 @@ public class BoardJdbcRepository {
                     result = ResponseBoardWithPostDTO.builder()
                             .boardName(rs.getString("BOARD_NAME"))
                             .boardDescription(rs.getString("DESCRIPTION"))
+                            .boardUrl(rs.getString("URL"))
                             .list(new ArrayList<>())
                             .build();
                 }
@@ -103,6 +104,6 @@ public class BoardJdbcRepository {
                         .build());
             }
             return result;
-        }, name);
+        }, url);
     }
 }
