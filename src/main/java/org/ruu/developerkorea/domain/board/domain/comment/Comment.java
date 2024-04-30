@@ -26,7 +26,7 @@ public class Comment extends BaseEntity {
     @Column(name = "COMMENT_WRITER")
     private String writer;
 
-    @OneToMany(mappedBy = "comment", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "comment", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<CommentPostAssociation> commentAndPost = new ArrayList<>();
 
     public void addCommentAndPost(CommentPostAssociation... commentPostAssociation){

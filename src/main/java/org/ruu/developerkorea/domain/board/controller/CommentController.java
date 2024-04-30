@@ -21,16 +21,26 @@ public class CommentController {
 
     @PostMapping
     @Operation(summary = "댓글을 등록합니다", description = "사용자가 댓글을 등록합니다.")
-    public ResponseEntity insertComment(@RequestBody RequestAppenderCommentDTO requestAppenderCommentDTO){
+    public ResponseEntity insertComment(
+            @RequestBody RequestAppenderCommentDTO requestAppenderCommentDTO){
         Long resultId = commentService.insertComment(requestAppenderCommentDTO);
         return ResponseEntity.ok(resultId);
     }
 
     @PatchMapping
     @Operation(summary = "댓글을 수정합니다.", description = "사용자가 댓글을 수정합니다.")
-    public ResponseEntity updateComment(@RequestBody RequestUpdateCommentDTO requestUpdateCommentDTO){
+    public ResponseEntity updateComment(
+            @RequestBody RequestUpdateCommentDTO requestUpdateCommentDTO){
         Long resultId = commentService.updateComment(requestUpdateCommentDTO);
         return ResponseEntity.ok(resultId);
+    }
+
+    @DeleteMapping("/{id}")
+    @Operation(summary = "댓글을 삭제합니다.", description = "사용자가 댓글을 삭제합니다.")
+    public ResponseEntity deleteComment(
+            @PathVariable Long id){
+        Long result = commentService.deleteComment(id);
+        return ResponseEntity.ok(result);
     }
 
 }

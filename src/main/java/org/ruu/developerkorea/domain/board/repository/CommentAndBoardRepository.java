@@ -10,4 +10,5 @@ public interface CommentAndBoardRepository extends JpaRepository<CommentPostAsso
 
     @Query("select cp from CommentPostAssociation cp where cp.post.id = :postId")
     public List<CommentPostAssociation> findAllByPostId(Long postId);
+
 }
