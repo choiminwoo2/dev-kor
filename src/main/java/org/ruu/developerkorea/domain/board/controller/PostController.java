@@ -5,7 +5,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.ruu.developerkorea.domain.board.model.dto.post.RequestAppendPostDTO;
 import org.ruu.developerkorea.domain.board.model.dto.post.RequestUpdatePostDTO;
-import org.ruu.developerkorea.domain.board.model.dto.post.ResponsePostDTO;
+import org.ruu.developerkorea.domain.board.model.dto.post.ResponsePostWithCommentDTO;
 import org.ruu.developerkorea.domain.board.service.PostService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -52,13 +52,13 @@ public class PostController {
     //Todo 보여주는 view라서 나중에 SPA로 변경할 경우 사용.
     @Operation(summary = "게시글 조회", description = "누구나 게시글을 조회할 수 있습니다.")
     @GetMapping("/{id}")
-    public ResponseEntity<ResponsePostDTO> selectOnePost(
+    public ResponseEntity<ResponsePostWithCommentDTO> selectOnePost(
             @RequestParam final String boardUrl,
             @PathVariable final Long id) {
         if (id == null) {
             return ResponseEntity.notFound().build();
         }
-        ResponsePostDTO postById = postService.findPostById(id, boardUrl);
+        ResponsePostWithCommentDTO postById = postService.findPostById(id, boardUrl);
 
         return ResponseEntity.ok(postById);
     }

@@ -1,10 +1,7 @@
 package org.ruu.developerkorea.domain.board.domain.comment;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.ruu.developerkorea.domain.board.domain.post.Post;
 
 @Entity
@@ -12,6 +9,8 @@ import org.ruu.developerkorea.domain.board.domain.post.Post;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
+@ToString
+@Getter
 public class CommentPostAssociation {
 
     @Id
@@ -21,10 +20,12 @@ public class CommentPostAssociation {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "POST_ID")
+    @ToString.Exclude
     private Post post;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "COMMENT_ID")
+    @ToString.Exclude
     private Comment comment;
 
 }

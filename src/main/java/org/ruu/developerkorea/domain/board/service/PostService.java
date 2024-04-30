@@ -7,7 +7,7 @@ import org.ruu.developerkorea.domain.board.domain.post.PostRetriever;
 import org.ruu.developerkorea.domain.board.domain.post.PostRewrite;
 import org.ruu.developerkorea.domain.board.model.dto.post.RequestAppendPostDTO;
 import org.ruu.developerkorea.domain.board.model.dto.post.RequestUpdatePostDTO;
-import org.ruu.developerkorea.domain.board.model.dto.post.ResponsePostDTO;
+import org.ruu.developerkorea.domain.board.model.dto.post.ResponsePostWithCommentDTO;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -32,7 +32,7 @@ public class PostService {
 
     }
 
-    public ResponsePostDTO findPostById(Long id, String boardUrl) {
+    public ResponsePostWithCommentDTO findPostById(Long id, String boardUrl) {
         return postRetriever.retrievePostById(id, boardUrl);
     }
 }
