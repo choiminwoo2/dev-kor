@@ -13,10 +13,11 @@ import java.time.LocalDate;
 @ToString
 public class PostDTO {
 
-    Long postId;
-    String title;
-    String content;
-    String writer;
-    LocalDate createdAt;
-    LocalDate updatedAt;
+    private Long postId;
+    private String title;
+    private String content;
+    private String writer;
+    private LocalDate createdAt;
+    private LocalDate updatedAt;
+    private int commentCount;
 }

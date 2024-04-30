@@ -72,13 +72,24 @@ public class BoardJdbcRepository {
 
     @Nullable
     public ResponseBoardWithPostDTO findByUrl(String url) {
-        String sql = "SELECT B.BOARD_NAME, B.DESCRIPTION, B.URL, P.POST_ID," +
-                " P.POST_TITLE, P.POST_CONTENT, P.POST_WRITER," +
-                " P.CREATED_AT," +
-                " P.UPDATED_AT" +
-                " FROM BOARD B " +
-                " JOIN POST P ON B.BOARD_ID = P.BOARD_ID " +
-                " WHERE B.URL = ?";
+        String sql = "SELECT B.BOARD_NAME, " +
+                "       B.DESCRIPTION, " +
+                "       B.URL, " +
+                "       P.POST_ID, " +
+                "       P.POST_TITLE, " +
+                "       P.POST_CONTENT, " +
+                "       P.POST_WRITER, " +
+                "       P.CREATED_AT, " +
+                "       P.UPDATED_AT, " +
+                "       (SELECT COUNT(*) AS CNT " +
+                "        FROM COMMENT C " +
+                "        JOIN POST_COMMENT PC ON C.COMMENT_ID = PC.COMMENT_ID " +
+                "        GROUP BY PC.POST_ID " +
+                "        HAVING PC.POST_ID = P.POST_ID) AS COMMENT_COUNT " +
+                "FROM BOARD B " +
+                "JOIN POST P ON B.BOARD_ID = P.BOARD_ID " +
+                "WHERE B.URL = ?";
+        log.info("boardWithPostSQL = [{}]", sql);
         return jdbcTemplate.query(sql, rs -> {
             ResponseBoardWithPostDTO result = null;
             while (rs.next()) {
@@ -94,6 +105,7 @@ public class BoardJdbcRepository {
                 LocalDate updatedAt = LocalDate.from(rs.getTimestamp("UPDATED_AT").toLocalDateTime());
                 log.info(createdAt.toString());
                 log.info(updatedAt.toString());
+
                 result.getList().add(PostDTO.builder()
                         .postId(rs.getLong("POST_ID"))
                         .title(rs.getString("POST_TITLE"))
@@ -101,6 +113,7 @@ public class BoardJdbcRepository {
                         .writer(rs.getString("POST_WRITER"))
                         .createdAt(createdAt)
                         .updatedAt(updatedAt)
+                        .commentCount(rs.getInt("COMMENT_COUNT"))
                         .build());
             }
             return result;
