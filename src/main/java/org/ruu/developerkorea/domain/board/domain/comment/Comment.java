@@ -33,4 +33,8 @@ public class Comment extends BaseEntity {
         Collections.addAll(this.commentAndPost, commentPostAssociation);
     }
 
+    public void changeComment(String text){
+        this.text = text;
+    }
+
 }
