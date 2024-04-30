@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 import java.util.Arrays;
 
 @Component
-@Profile({"local","local-dev"})
+@Profile({"local, local-dev"})
 public class AppRunner implements ApplicationRunner {
 
     private final Environment environment;

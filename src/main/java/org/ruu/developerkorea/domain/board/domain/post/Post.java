@@ -4,6 +4,12 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.ruu.developerkorea.domain.board.domain.BaseEntity;
 import org.ruu.developerkorea.domain.board.domain.board.Board;
+import org.ruu.developerkorea.domain.board.domain.comment.Comment;
+import org.ruu.developerkorea.domain.board.domain.comment.CommentPostAssociation;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 @Entity
 @Getter
@@ -22,6 +28,9 @@ public class Post extends BaseEntity {
     @JoinColumn(name = "BOARD_ID")
     private Board board;
 
+    @OneToMany(mappedBy = "post", cascade = CascadeType.PERSIST)
+    private List<CommentPostAssociation> postAndComment = new ArrayList<>();
+
     @Column(name = "POST_TITLE", nullable = false)
     private String title;
 
@@ -39,4 +48,10 @@ public class Post extends BaseEntity {
         this.title = title;
         this.content = content;
     }
+
+    public void addCommentAndPost(CommentPostAssociation... commentPostAssociation){
+        Collections.addAll(this.postAndComment, commentPostAssociation);
+    }
+
+
 }

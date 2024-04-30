@@ -51,14 +51,14 @@ public class PostController {
 
     //Todo 보여주는 view라서 나중에 SPA로 변경할 경우 사용.
     @Operation(summary = "게시글 조회", description = "누구나 게시글을 조회할 수 있습니다.")
-    @GetMapping("{boardName}/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<ResponsePostDTO> selectOnePost(
-            @PathVariable final String boardName,
+            @RequestParam final String boardUrl,
             @PathVariable final Long id) {
         if (id == null) {
             return ResponseEntity.notFound().build();
         }
-        ResponsePostDTO postById = postService.findPostById(id, boardName);
+        ResponsePostDTO postById = postService.findPostById(id, boardUrl);
 
         return ResponseEntity.ok(postById);
     }

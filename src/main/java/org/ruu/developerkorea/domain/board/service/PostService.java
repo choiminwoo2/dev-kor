@@ -32,7 +32,7 @@ public class PostService {
 
     }
 
-    public ResponsePostDTO findPostById(Long id, String boardName) {
-        return postRetriever.retrievePostById(id, boardName);
+    public ResponsePostDTO findPostById(Long id, String boardUrl) {
+        return postRetriever.retrievePostById(id, boardUrl);
     }
 }

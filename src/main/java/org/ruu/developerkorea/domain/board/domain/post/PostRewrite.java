@@ -3,7 +3,6 @@ package org.ruu.developerkorea.domain.board.domain.post;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.ruu.developerkorea.domain.board.model.dto.post.RequestUpdatePostDTO;
-import org.ruu.developerkorea.domain.board.model.mapper.PostMapper;
 import org.ruu.developerkorea.domain.board.repository.PostRepository;
 import org.ruu.developerkorea.global.error.BusinessLogicException;
 import org.springframework.stereotype.Component;
