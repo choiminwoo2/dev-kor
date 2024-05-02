@@ -10,7 +10,6 @@ import org.ruu.developerkorea.domain.board.model.dto.board.ResponseBoardDTO;
 import org.ruu.developerkorea.domain.board.model.dto.comment.ResponseCommentDTO;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -21,6 +20,7 @@ public class ResponsePostWithCommentDTO {
     private ResponseBoardDTO responseBoardDTO;
     private String title;
     private String content;
+    private String writer;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime updateAt;
     private List<ResponseCommentDTO> comments;
@@ -33,6 +33,7 @@ public class ResponsePostWithCommentDTO {
                 .id(post.getId())
                 .title(post.getTitle())
                 .content(post.getContent())
+                .writer(post.getWriter())
                 .updateAt(LocalDateTime.now())
                 .responseBoardDTO(ResponseBoardDTO.builder()
                         .name(post.getBoard().getName())
