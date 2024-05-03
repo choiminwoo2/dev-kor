@@ -1,8 +1,10 @@
 package org.ruu.developerkorea.domain.board.domain.comment;
 
 import lombok.RequiredArgsConstructor;
+import org.apache.coyote.Response;
 import org.ruu.developerkorea.domain.board.domain.post.Post;
 import org.ruu.developerkorea.domain.board.model.dto.comment.RequestAppenderCommentDTO;
+import org.ruu.developerkorea.domain.board.model.dto.comment.ResponseCommentDTO;
 import org.ruu.developerkorea.domain.board.model.mapper.CommentMapper;
 import org.ruu.developerkorea.domain.board.repository.CommentRepository;
 import org.ruu.developerkorea.domain.board.repository.CommentAndBoardRepository;
@@ -20,7 +22,7 @@ public class CommentAppender {
     private final CommentAndBoardRepository commentAndBoardRepository;
 
     @Transactional
-    public Long append(RequestAppenderCommentDTO requestAppenderCommentDTO) {
+    public ResponseCommentDTO append(RequestAppenderCommentDTO requestAppenderCommentDTO) {
         Comment comment = CommentMapper.INSTANCE.RequestAppendCommentToComment(requestAppenderCommentDTO);
         Comment comments = commentRepository.save(comment);
         Post post = postRepository.findById(requestAppenderCommentDTO.getPostId()).orElse(null);
@@ -33,6 +35,11 @@ public class CommentAppender {
                 .build();
         commentAndBoardRepository.save(commentPostAssociation);
 
-        return comments.getId();
+        return ResponseCommentDTO.builder()
+                .commentWriter(comments.getWriter())
+                .commentId(comments.getId())
+                .commentText(comments.getText())
+                .updateAt(comments.getUpdatedAt())
+                .build();
     }
 }

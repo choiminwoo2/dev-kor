@@ -21,7 +21,7 @@ public class CommentService {
     private final CommentRemover commentRemover;
     private final CommentRetriever commentRetriever;
 
-    public Long insertComment(RequestAppenderCommentDTO requestAppenderCommentDTO) {
+    public ResponseCommentDTO insertComment(RequestAppenderCommentDTO requestAppenderCommentDTO) {
         return commentAppender.append(requestAppenderCommentDTO);
     }
 

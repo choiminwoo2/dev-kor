@@ -23,9 +23,9 @@ public class CommentController {
 
     @PostMapping
     @Operation(summary = "댓글을 등록합니다", description = "사용자가 댓글을 등록합니다.")
-    public ResponseEntity insertComment(
+    public ResponseEntity<ResponseCommentDTO> insertComment(
             @RequestBody RequestAppenderCommentDTO requestAppenderCommentDTO){
-        Long resultId = commentService.insertComment(requestAppenderCommentDTO);
+        ResponseCommentDTO resultId = commentService.insertComment(requestAppenderCommentDTO);
         return ResponseEntity.ok(resultId);
     }
 
