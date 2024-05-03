@@ -13,6 +13,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
+@ToString
 public class Comment extends BaseEntity {
 
     @Id
@@ -26,6 +27,7 @@ public class Comment extends BaseEntity {
     @Column(name = "COMMENT_WRITER")
     private String writer;
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "comment", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<CommentPostAssociation> commentAndPost = new ArrayList<>();
 

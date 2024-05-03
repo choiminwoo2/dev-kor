@@ -31,10 +31,10 @@ public class CommentController {
 
     @PatchMapping
     @Operation(summary = "댓글을 수정합니다.", description = "사용자가 댓글을 수정합니다.")
-    public ResponseEntity updateComment(
+    public ResponseEntity<ResponseCommentDTO> updateComment(
             @RequestBody RequestUpdateCommentDTO requestUpdateCommentDTO){
-        Long resultId = commentService.updateComment(requestUpdateCommentDTO);
-        return ResponseEntity.ok(resultId);
+        ResponseCommentDTO comment = commentService.updateComment(requestUpdateCommentDTO);
+        return ResponseEntity.ok(comment);
     }
 
     @DeleteMapping("/{id}")

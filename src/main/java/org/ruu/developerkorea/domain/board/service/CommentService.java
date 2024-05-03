@@ -25,7 +25,7 @@ public class CommentService {
         return commentAppender.append(requestAppenderCommentDTO);
     }
 
-    public Long updateComment(RequestUpdateCommentDTO requestUpdateCommentDTO) {
+    public ResponseCommentDTO updateComment(RequestUpdateCommentDTO requestUpdateCommentDTO) {
         return commentRewrite.rewrite(requestUpdateCommentDTO);
     }
 
