@@ -28,7 +28,7 @@ public class Post extends BaseEntity {
     @JoinColumn(name = "BOARD_ID")
     private Board board;
 
-    @OneToMany(mappedBy = "post", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "post", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<CommentPostAssociation> postAndComment = new ArrayList<>();
 
     @Column(name = "POST_TITLE", nullable = false)

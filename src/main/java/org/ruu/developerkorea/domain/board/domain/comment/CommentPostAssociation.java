@@ -23,7 +23,7 @@ public class CommentPostAssociation {
     @ToString.Exclude
     private Post post;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "COMMENT_ID")
     @ToString.Exclude
     private Comment comment;
