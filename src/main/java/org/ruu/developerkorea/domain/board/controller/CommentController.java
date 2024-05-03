@@ -11,6 +11,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @Tag(name = "COMMENT API")
@@ -41,6 +43,16 @@ public class CommentController {
             @PathVariable Long id){
         Long result = commentService.deleteComment(id);
         return ResponseEntity.ok(result);
+    }
+
+    @GetMapping
+    @Operation(summary = "댓글을 조회합니다.", description = "특정 게시글의 댓글을 모두 조회합니다.")
+    public ResponseEntity<List<ResponseCommentDTO>> getAllComments(
+            @RequestParam Long postId
+    ){
+
+        List<ResponseCommentDTO> comments = commentService.getComments(postId);
+        return ResponseEntity.ok(comments);
     }
 
 }
