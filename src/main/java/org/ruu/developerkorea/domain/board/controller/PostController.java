@@ -20,7 +20,7 @@ public class PostController {
 
     @PostMapping
     @Operation(summary = "게시글 작성", description = "유저가 게시글을 저장합니다.")
-    public ResponseEntity<String> createPost(@RequestBody RequestAppendPostDTO requestAppendPostDTO) {
+    public ResponseEntity<String> createPost(RequestAppendPostDTO requestAppendPostDTO) {
         Long postNumber = postService.createPost(requestAppendPostDTO);
         if (postNumber == null) {
             return ResponseEntity.notFound().build();
