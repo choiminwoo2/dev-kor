@@ -88,7 +88,8 @@ public class BoardJdbcRepository {
                 "        HAVING PC.POST_ID = P.POST_ID) AS COMMENT_COUNT " +
                 "FROM BOARD B " +
                 "JOIN POST P ON B.BOARD_ID = P.BOARD_ID " +
-                "WHERE B.URL = ?";
+                "WHERE B.URL = ?" +
+                " ORDER BY P.POST_ID DESC";
         log.info("boardWithPostSQL = [{}]", sql);
         return jdbcTemplate.query(sql, rs -> {
             ResponseBoardWithPostDTO result = null;
@@ -103,15 +104,11 @@ public class BoardJdbcRepository {
                 }
                 LocalDate createdAt = LocalDate.from(rs.getTimestamp("CREATED_AT").toLocalDateTime());
                 LocalDate updatedAt = LocalDate.from(rs.getTimestamp("UPDATED_AT").toLocalDateTime());
-                log.info(createdAt.toString());
-                log.info(updatedAt.toString());
-
                 result.getList().add(PostDTO.builder()
                         .postId(rs.getLong("POST_ID"))
                         .title(rs.getString("POST_TITLE"))
                         .content(rs.getString("POST_CONTENT"))
                         .writer(rs.getString("POST_WRITER"))
-                        .createdAt(createdAt)
                         .updatedAt(updatedAt)
                         .commentCount(rs.getInt("COMMENT_COUNT"))
                         .build());

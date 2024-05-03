@@ -1,5 +1,6 @@
 package org.ruu.developerkorea.domain.board.model.dto.post;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
@@ -17,7 +18,7 @@ public class PostDTO {
     private String title;
     private String content;
     private String writer;
-    private LocalDate createdAt;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy.MM.dd")
     private LocalDate updatedAt;
     private int commentCount;
 }
