@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 import java.util.Arrays;
 
 @Component
-@Profile({"local"})
+@Profile({"local, local-dev"})
 public class AppRunner implements ApplicationRunner {
 
     private final Environment environment;
@@ -36,24 +36,40 @@ public class AppRunner implements ApplicationRunner {
         Board board1 = Board.builder()
                 .name("커뮤니티")
                 .description("커뮤니티사이트입니다.")
+                .url("community")
                 .pwd("12345")
                 .build();
         Board board2 = Board.builder()
                 .name("Q&A")
+                .url("qna")
                 .description("Q&A사이트입니다.")
                 .pwd("12345")
                 .build();
-        boardRepository.save(board1);
-        boardRepository.save(board2);
 
-        for (int i = 0; i < 20; i++) {
-            postRepository.save(Post.builder()
-                    .title("타이틀입니다." + i)
-                    .writer("작성자")
-                    .content("게시글 내용입니다.")
-                    .board(board1)
-                    .build());
+        if(boardRepository.findById(1L).isEmpty()){
+            boardRepository.save(board1);
+            boardRepository.save(board2);
+
         }
+        if(postRepository.findById(1L).isEmpty()){
+            for (int i = 0; i < 20; i++) {
+                postRepository.save(Post.builder()
+                        .title("타이틀입니다." + i)
+                        .writer("작성자")
+                        .content("게시글 내용입니다.")
+                        .board(board1)
+                        .build());
+            }
+            for (int i =0; i< 20; i++){
+                postRepository.save(Post.builder()
+                        .title("타이틀입니다." + i)
+                        .writer("작성자")
+                        .content("게시글 내용입니다.")
+                        .board(board2)
+                        .build());
+            }
+        }
+
     }
 
     public void readProperties() {

@@ -14,8 +14,9 @@ import java.util.List;
 @ToString
 public class ResponseBoardWithPostDTO {
 
-    String boardName;
-    String boardDescription;
+    private String boardName;
+    private String boardDescription;
+    private String boardUrl;
 
-    List<PostDTO> list;
+    private List<PostDTO> list;
 }

@@ -11,6 +11,6 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     @Query("select p" +
             " from Post p join fetch p.board b" +
             " where p.id = :id" +
-            " and b.name = :boardName")
-    Optional<Post> findPostByIdWithBoard(Long id, String boardName);
+            " and b.url = :boardUrl")
+    Optional<Post> findPostByIdWithBoard(Long id, String boardUrl);
 }

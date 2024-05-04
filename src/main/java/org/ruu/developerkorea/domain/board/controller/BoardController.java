@@ -11,13 +11,14 @@ import org.ruu.developerkorea.domain.board.model.dto.board.RequestUpdateBoardDTO
 import org.ruu.developerkorea.domain.board.model.dto.board.ResponseBoardWithPostDTO;
 import org.ruu.developerkorea.domain.board.service.BoardService;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/board")
 @Tag(name = "Board API")
 @RequiredArgsConstructor
@@ -69,13 +70,13 @@ public class BoardController {
     }
 
     @Operation(summary = "특정 게시판 조회", description = "누구나 특정 게시판을 조회할 수 있습니다.")
-    @GetMapping("/{name}")
-    public String getBoardByName(@PathVariable String name, Model model) {
+    @GetMapping("/{url}")
+    public ResponseEntity<ResponseBoardWithPostDTO> getBoardByName(@PathVariable String url, Model model) {
 
-        ResponseBoardWithPostDTO boardDTO = boardService.displayBoardByName(name);
+        ResponseBoardWithPostDTO boardDTO = boardService.displayBoardByUrl(url);
         model.addAttribute("dtoList", boardDTO);
         log.info("BoardWithPostDTO : {} ", boardDTO);
-        return "board/board";
+        return ResponseEntity.ok(boardDTO);
 
     }
 

@@ -19,7 +19,7 @@ public class PostAppender {
     @Transactional
     public Long write(RequestAppendPostDTO requestAppendPostDTO) {
 
-        Board board = boardRepository.findByName(requestAppendPostDTO.getBoardName());
+        Board board = boardRepository.findByUrl(requestAppendPostDTO.getUrl());
         Post post = PostMapper.INSTANCE.requestAppendPostDTOToPost(requestAppendPostDTO);
         post.setBoard(board);
 
