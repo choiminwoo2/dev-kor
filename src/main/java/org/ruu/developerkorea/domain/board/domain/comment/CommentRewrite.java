@@ -4,9 +4,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.ruu.developerkorea.domain.board.model.dto.comment.RequestUpdateCommentDTO;
 import org.ruu.developerkorea.domain.board.model.dto.comment.ResponseCommentDTO;
-import org.ruu.developerkorea.domain.board.model.mapper.CommentMapper;
 import org.ruu.developerkorea.domain.board.repository.CommentRepository;
-import org.ruu.developerkorea.global.error.BusinessLogicException;
+import org.ruu.developerkorea.global.error.EntityNotFoundException;
+import org.ruu.developerkorea.global.error.ErrorType;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,7 +21,7 @@ public class CommentRewrite {
     public ResponseCommentDTO rewrite(RequestUpdateCommentDTO requestUpdateCommentDTO){
         Comment comment = commentRepository.findById(requestUpdateCommentDTO.getCommentId()).orElse(null);
         if(comment == null){
-            throw new BusinessLogicException("comment not found");
+            throw new EntityNotFoundException(ErrorType.ENTITY_NOT_FOUND);
         }
         comment.changeComment(requestUpdateCommentDTO.getText());
 

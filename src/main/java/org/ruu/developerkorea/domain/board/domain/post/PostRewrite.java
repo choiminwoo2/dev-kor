@@ -4,7 +4,8 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.ruu.developerkorea.domain.board.model.dto.post.RequestUpdatePostDTO;
 import org.ruu.developerkorea.domain.board.repository.PostRepository;
-import org.ruu.developerkorea.global.error.BusinessLogicException;
+import org.ruu.developerkorea.global.error.EntityNotFoundException;
+import org.ruu.developerkorea.global.error.ErrorType;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
@@ -19,7 +20,7 @@ public class PostRewrite {
     public Long rewrite(RequestUpdatePostDTO requestUpdatePostDTO) {
         Optional<Post> result = postRepository.findById(requestUpdatePostDTO.getId());
         if (result.isEmpty()){
-            throw new BusinessLogicException("Post not found");
+            throw new EntityNotFoundException(ErrorType.ENTITY_NOT_FOUND);
         }
         Post post = result.get();
 
