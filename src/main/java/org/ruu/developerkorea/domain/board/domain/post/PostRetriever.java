@@ -5,7 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.ruu.developerkorea.domain.board.domain.comment.Comment;
 import org.ruu.developerkorea.domain.board.model.dto.post.ResponsePostWithCommentDTO;
 import org.ruu.developerkorea.domain.board.repository.PostRepository;
-import org.ruu.developerkorea.global.error.BusinessLogicException;
+import org.ruu.developerkorea.global.error.EntityNotFoundException;
+import org.ruu.developerkorea.global.error.ErrorType;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,7 +26,7 @@ public class PostRetriever {
         Optional<Post> result = postRepository.findPostByIdWithBoard(postId, boardUrl);
         if(result.isEmpty()){
             //TODO 일관적인 Exception 처리는 나중에...
-            throw new BusinessLogicException("Post not found");
+            throw new EntityNotFoundException(ErrorType.ENTITY_NOT_FOUND);
         }
         Post post = result.get();
         List<Comment> comments = new ArrayList<>();

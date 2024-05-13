@@ -6,7 +6,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.ruu.developerkorea.domain.board.domain.board.Board;
 import org.ruu.developerkorea.domain.board.model.dto.board.ResponseBoardWithPostDTO;
 import org.ruu.developerkorea.domain.board.model.dto.post.PostDTO;
-import org.ruu.developerkorea.global.error.BusinessLogicException;
+import org.ruu.developerkorea.global.error.EntityNotFoundException;
+import org.ruu.developerkorea.global.error.ErrorType;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.lang.Nullable;
@@ -36,7 +37,7 @@ public class BoardJdbcRepository {
 
         if (update == 0) {
 
-            throw new BusinessLogicException("non existent data");
+            throw new EntityNotFoundException(ErrorType.ENTITY_NOT_FOUND);
         }
         return board.getId();
     }
@@ -47,7 +48,7 @@ public class BoardJdbcRepository {
         List<Board> boards = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Board.class));
 
         if (boards.isEmpty()) {
-            throw new BusinessLogicException("query is empty");
+            throw new EntityNotFoundException(ErrorType.ENTITY_NOT_FOUND);
         }
         return boards;
     }
