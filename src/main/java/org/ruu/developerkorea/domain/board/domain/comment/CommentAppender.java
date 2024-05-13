@@ -1,7 +1,6 @@
 package org.ruu.developerkorea.domain.board.domain.comment;
 
 import lombok.RequiredArgsConstructor;
-import org.apache.coyote.Response;
 import org.ruu.developerkorea.domain.board.domain.post.Post;
 import org.ruu.developerkorea.domain.board.model.dto.comment.RequestAppenderCommentDTO;
 import org.ruu.developerkorea.domain.board.model.dto.comment.ResponseCommentDTO;
@@ -9,7 +8,8 @@ import org.ruu.developerkorea.domain.board.model.mapper.CommentMapper;
 import org.ruu.developerkorea.domain.board.repository.CommentRepository;
 import org.ruu.developerkorea.domain.board.repository.CommentAndBoardRepository;
 import org.ruu.developerkorea.domain.board.repository.PostRepository;
-import org.ruu.developerkorea.global.error.BusinessLogicException;
+import org.ruu.developerkorea.global.error.EntityNotFoundException;
+import org.ruu.developerkorea.global.error.ErrorType;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,7 +27,7 @@ public class CommentAppender {
         Comment comments = commentRepository.save(comment);
         Post post = postRepository.findById(requestAppenderCommentDTO.getPostId()).orElse(null);
         if(post == null){
-            throw new BusinessLogicException("PostAndComment not found");
+            throw new EntityNotFoundException(ErrorType.ENTITY_NOT_FOUND);
         }
         CommentPostAssociation commentPostAssociation = CommentPostAssociation.builder()
                 .comment(comments)
