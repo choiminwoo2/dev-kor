@@ -8,6 +8,7 @@ import org.ruu.developerkorea.domain.board.model.dto.comment.RequestUpdateCommen
 import org.ruu.developerkorea.domain.board.model.dto.comment.ResponseCommentDTO;
 import org.ruu.developerkorea.domain.board.service.CommentService;
 import org.ruu.developerkorea.global.response.ApiResponse;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -40,6 +41,7 @@ public class CommentController {
 
     @DeleteMapping("/{id}")
     @Operation(summary = "댓글을 삭제합니다.", description = "사용자가 댓글을 삭제합니다.")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public ApiResponse<?> deleteComment(
             @PathVariable Long id){
         Long result = commentService.deleteComment(id);
