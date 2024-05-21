@@ -1,4 +1,28 @@
-spring.config.activate.on-profile: test
+spring:
+  jpa:
+    properties:
+      hibernate.hibernate.default_batch_fetch_size: 100
+    open-in-view: false
+    hibernate:
+      ddl-auto: none
+  servlet:
+    multipart:
+      enabled: true
+      location: C:\\upload
+      max-request-size: 30MB
+      max-file-size: 10MB
+  mvc:
+    view:
+      prefix: /templates/
+      suffix: .html
+
+logging:
+  level:
+    org.ruu.developerkorea: info
+    org.ruu: debug
+
+---
+spring.config.activate.on-profile: local
 
 spring:
   datasource:
@@ -15,9 +39,28 @@ spring:
   h2:
     console:
       enabled: true
+---
+spring.config.import: classpath:application-db.properties
+spring.config.activate.on-profile: local-dev
+spring:
+  datasource:
+    hikari:
+      connection-timeout: 5000
+      maximum-pool-size: 5
+      keepalive-time: 30000
+      validation-timeout: 1000
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/${database.name}?serverTimezone=UTC&characterEncoding=UTF-8
+    username: ${database.username}
+    password: ${database.password}
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
 
 
-logging:
-  level:
-    org.ruu.developerkorea: trace
-    org.ruu: trace
+
+
+
+

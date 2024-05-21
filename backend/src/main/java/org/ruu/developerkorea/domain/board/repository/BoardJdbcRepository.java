@@ -24,6 +24,8 @@ public class BoardJdbcRepository {
 
     private final JdbcTemplate jdbcTemplate;
 
+
+
     @Transactional
     @Nullable
     public Long save(Board board) {
@@ -71,50 +73,50 @@ public class BoardJdbcRepository {
         jdbcTemplate.update(sql, id);
     }
 
-    @Nullable
-    public ResponseBoardWithPostDTO findByUrl(String url) {
-        String sql = "SELECT B.BOARD_NAME, " +
-                "       B.DESCRIPTION, " +
-                "       B.URL, " +
-                "       P.POST_ID, " +
-                "       P.POST_TITLE, " +
-                "       P.POST_CONTENT, " +
-                "       P.POST_WRITER, " +
-                "       P.CREATED_AT, " +
-                "       P.UPDATED_AT, " +
-                "       (SELECT COUNT(*) AS CNT " +
-                "        FROM COMMENT C " +
-                "        JOIN POST_COMMENT PC ON C.COMMENT_ID = PC.COMMENT_ID " +
-                "        GROUP BY PC.POST_ID " +
-                "        HAVING PC.POST_ID = P.POST_ID) AS COMMENT_COUNT " +
-                "FROM BOARD B " +
-                "JOIN POST P ON B.BOARD_ID = P.BOARD_ID " +
-                "WHERE B.URL = ?" +
-                " ORDER BY P.POST_ID DESC";
-        log.info("boardWithPostSQL = [{}]", sql);
-        return jdbcTemplate.query(sql, rs -> {
-            ResponseBoardWithPostDTO result = null;
-            while (rs.next()) {
-                if (result == null) {
-                    result = ResponseBoardWithPostDTO.builder()
-                            .boardName(rs.getString("BOARD_NAME"))
-                            .boardDescription(rs.getString("DESCRIPTION"))
-                            .boardUrl(rs.getString("URL"))
-                            .list(new ArrayList<>())
-                            .build();
-                }
-                LocalDate createdAt = LocalDate.from(rs.getTimestamp("CREATED_AT").toLocalDateTime());
-                LocalDate updatedAt = LocalDate.from(rs.getTimestamp("UPDATED_AT").toLocalDateTime());
-                result.getList().add(PostDTO.builder()
-                        .postId(rs.getLong("POST_ID"))
-                        .title(rs.getString("POST_TITLE"))
-                        .content(rs.getString("POST_CONTENT"))
-                        .writer(rs.getString("POST_WRITER"))
-                        .updatedAt(updatedAt)
-                        .commentCount(rs.getInt("COMMENT_COUNT"))
-                        .build());
-            }
-            return result;
-        }, url);
-    }
+   // @Nullable
+//    public ResponseBoardWithPostDTO findByUrl(String url) {
+//        String sql = "SELECT B.BOARD_NAME, " +
+//                "       B.DESCRIPTION, " +
+//                "       B.URL, " +
+//                "       P.POST_ID, " +
+//                "       P.POST_TITLE, " +
+//                "       P.POST_CONTENT, " +
+//                "       P.POST_WRITER, " +
+//                "       P.CREATED_AT, " +
+//                "       P.UPDATED_AT, " +
+//                "       (SELECT COUNT(*) AS CNT " +
+//                "        FROM COMMENT C " +
+//                "        JOIN POST_COMMENT PC ON C.COMMENT_ID = PC.COMMENT_ID " +
+//                "        GROUP BY PC.POST_ID " +
+//                "        HAVING PC.POST_ID = P.POST_ID) AS COMMENT_COUNT " +
+//                "FROM BOARD B " +
+//                "JOIN POST P ON B.BOARD_ID = P.BOARD_ID " +
+//                "WHERE B.URL = ?" +
+//                " ORDER BY P.POST_ID DESC";
+//        log.info("boardWithPostSQL = [{}]", sql);
+//        return jdbcTemplate.query(sql, rs -> {
+//            ResponseBoardWithPostDTO result = null;
+//            while (rs.next()) {
+//                if (result == null) {
+//                    result = ResponseBoardWithPostDTO.builder()
+//                            .boardName(rs.getString("BOARD_NAME"))
+//                            .boardDescription(rs.getString("DESCRIPTION"))
+//                            .boardUrl(rs.getString("URL"))
+//                            .list(new ArrayList<>())
+//                            .build();
+//                }
+//                LocalDate createdAt = LocalDate.from(rs.getTimestamp("CREATED_AT").toLocalDateTime());
+//                LocalDate updatedAt = LocalDate.from(rs.getTimestamp("UPDATED_AT").toLocalDateTime());
+//                result.getList().add(PostDTO.builder()
+//                        .postId(rs.getLong("POST_ID"))
+//                        .title(rs.getString("POST_TITLE"))
+//                        .content(rs.getString("POST_CONTENT"))
+//                        .writer(rs.getString("POST_WRITER"))
+//                        .updatedAt(updatedAt)
+//                        .commentCount(rs.getInt("COMMENT_COUNT"))
+//                        .build());
+//            }
+//            return result;
+//        }, url);
+//    }
 }

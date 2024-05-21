@@ -32,8 +32,11 @@ public class Board extends BaseEntity {
     @Column(nullable = false, length = 100)
     private String url;
 
-    @OneToMany(mappedBy = "board", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "board", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<Post> posts = new ArrayList<>();
+
+    @OneToMany(mappedBy = "board", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Category> categories = new ArrayList<>();
 
     public void rewriteBoard(String description) {
         this.description = description;

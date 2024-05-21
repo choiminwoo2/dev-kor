@@ -53,5 +53,4 @@ public class Post extends BaseEntity {
         Collections.addAll(this.postAndComment, commentPostAssociation);
     }
 
-
 }

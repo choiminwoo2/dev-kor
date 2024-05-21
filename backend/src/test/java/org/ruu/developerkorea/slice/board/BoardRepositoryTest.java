@@ -1,18 +1,19 @@
 package org.ruu.developerkorea.slice.board;
 
+import jakarta.persistence.EntityManager;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.ruu.developerkorea.annotation.RepositoryTest;
 import org.ruu.developerkorea.domain.board.domain.board.Board;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
 @RepositoryTest
 public class BoardRepositoryTest {
 
     @Autowired
-    private TestEntityManager entityManager;
+    private EntityManager entityManager;
+
 
     private Board board;
     @BeforeEach
