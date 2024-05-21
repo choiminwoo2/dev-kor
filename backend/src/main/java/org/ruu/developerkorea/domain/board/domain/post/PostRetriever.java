@@ -3,10 +3,15 @@ package org.ruu.developerkorea.domain.board.domain.post;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.ruu.developerkorea.domain.board.domain.comment.Comment;
+import org.ruu.developerkorea.domain.board.model.dto.post.PostDTO;
+import org.ruu.developerkorea.domain.board.model.dto.post.PostMapping;
 import org.ruu.developerkorea.domain.board.model.dto.post.ResponsePostWithCommentDTO;
 import org.ruu.developerkorea.domain.board.repository.PostRepository;
 import org.ruu.developerkorea.global.error.EntityNotFoundException;
 import org.ruu.developerkorea.global.error.ErrorType;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,16 +29,23 @@ public class PostRetriever {
     @Transactional
     public ResponsePostWithCommentDTO retrievePostById(Long postId, String boardUrl) {
         Optional<Post> result = postRepository.findPostByIdWithBoard(postId, boardUrl);
-        if(result.isEmpty()){
+        if (result.isEmpty()) {
             //TODO 일관적인 Exception 처리는 나중에...
             throw new EntityNotFoundException(ErrorType.ENTITY_NOT_FOUND);
         }
         Post post = result.get();
         List<Comment> comments = new ArrayList<>();
-        post.getPostAndComment().forEach( commentPost ->{
+        post.getPostAndComment().forEach(commentPost -> {
             comments.add(commentPost.getComment());
         });
 
         return ResponsePostWithCommentDTO.of(post, comments);
+    }
+
+    public List<PostDTO> retrievePostByBoardUrl(String boardUrl) {
+        Pageable pageable = PageRequest.of(0, 10);
+        Page<PostDTO> postList = postRepository.findPostByBoardUrlWithPagination2(boardUrl, pageable);
+        log.info("PostListLengh : {}", postList.getContent().size());
+        return postList.getContent();
     }
 }

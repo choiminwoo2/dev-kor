@@ -1,4 +1,4 @@
 package org.ruu.developerkorea.domain.board.model.dto.board;
 
-public class FindBoardDTO {
+public class SearchBoardDTO {
 }
